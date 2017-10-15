@@ -25,23 +25,12 @@ class SmallSMILHandler(ContentHandler):
         """
         Método que se llama cuando se abre una etiqueta
         """
-        self.tags['region']['id'] = 'hrhr'
-        print(self.tags['region']['id'])
+
         if name in self.tags:
-            print(self.tags[name])
+            attribs = attrs.getNames()
+            for attrib in attribs:
+                self.tags[name][attrib] = attrs.get(attrib, "")
 
-
-
-    def endElement(self, name):
-        """
-        Método que se llama al cerrar una etiqueta
-        """
-
-
-    def characters(self, char):
-        """
-        Método para tomar contenido de la etiqueta
-        """
 
 if __name__ == "__main__":
     """
@@ -50,4 +39,6 @@ if __name__ == "__main__":
     parser = make_parser()
     sHandler = SmallSMILHandler()
     parser.setContentHandler(sHandler)
+    print(sHandler.tags)
     parser.parse(open('karaoke.smil'))
+    print(sHandler.tags)
