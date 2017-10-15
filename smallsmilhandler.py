@@ -14,17 +14,22 @@ class SmallSMILHandler(ContentHandler):
         Constructor. Inicializamos las variables
         """
         self.tags = {
-            'root-layout': {'width', 'height', 'background-color'},
-            'region': {'id', 'top', 'bottom', 'left', 'right'},
-            'img': {'src', 'region', 'begin', 'dur'},
-            'audio': {'src', 'begin', 'dur'},
-            'textstream': {'src', 'region'}
+            'root-layout': {'width':'', 'height':'', 'background-color':''},
+            'region': {'id':'', 'top':'', 'bottom':'', 'left':'', 'right':''},
+            'img': {'src':'', 'region':'', 'begin':'', 'dur':''},
+            'audio': {'src':'', 'begin':'', 'dur':''},
+            'textstream': {'src':'', 'region':''}
         }
 
     def startElement(self, name, attrs):
         """
         Método que se llama cuando se abre una etiqueta
         """
+        self.tags['region']['id'] = 'hrhr'
+        print(self.tags['region']['id'])
+        if name in self.tags:
+            print(self.tags[name])
+
 
 
     def endElement(self, name):
