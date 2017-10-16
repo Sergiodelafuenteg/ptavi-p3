@@ -4,6 +4,7 @@
 from xml.sax import make_parser
 from smallsmilhandler import SmallSMILHandler
 import json
+from urllib.request import urlretrieve
 
 class KaraokeLocal(SmallSMILHandler):
 
@@ -34,9 +35,19 @@ class KaraokeLocal(SmallSMILHandler):
         #root-layout\twidth="248"\theight="300"\tbackground-color="blue"\n
     def to_json(self):
         with open('karaoke.json', 'w') as outfile:
-            json.dump(self.tags, outfile)
+            json.dump(self.tags, outfile, indent = 3)
+
+    def do_local(self):
+
+        for tag in self.tags:
+            for attri in tag:
+                for cont in tag[attri]:
+                    if cont == 'src' and tag[attri][cont][:7] == "http://":
+                        print("yeyeyey")
+                        urlretrieve(tag[attri][cont],tag[attri][cont].split('/')[-1])
+
 
 if __name__ == '__main__':
 
     karaoke = KaraokeLocal()
-    karaoke.to_json()
+    karaoke.do_local()
