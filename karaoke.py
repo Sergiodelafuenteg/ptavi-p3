@@ -10,10 +10,12 @@ from urllib.request import urlretrieve
 class KaraokeLocal(SmallSMILHandler):
 
     def __init__(self):
+
+        fich = sys.argv[1]
         parser = make_parser()
         sHandler = SmallSMILHandler()
         parser.setContentHandler(sHandler)
-        parser.parse(open('karaoke.smil'))
+        parser.parse(open(fich))
         self.tags = sHandler.get_tags()
 
     def __str__(self):
@@ -45,7 +47,7 @@ class KaraokeLocal(SmallSMILHandler):
                 for cont in tag[attri]:
                     if cont == 'src' and tag[attri][cont][:7] == "http://":
                         urlretrieve(tag[attri][cont],tag[attri][cont].split('/')[-1])
-                        tag[attri][cont] = tag[attri][cont].split('/')[-1])
+                        tag[attri][cont] = tag[attri][cont].split('/')[-1]
 
 if __name__ == '__main__':
 
