@@ -8,25 +8,26 @@ class SmallSMILHandler(ContentHandler):
     """Clase para manejar SMIL"""
     def __init__ (self):
         """Constructor. Inicializamos las variables"""
-
+        self.list = []
         self.tags = {
-            'root-layout': {'width':'', 'height':'', 'background-color':''},
-            'region': {'id':'', 'top':'', 'bottom':'', 'left':'', 'right':''},
-            'img': {'src':'', 'region':'', 'begin':'', 'dur':''},
-            'audio': {'src':'', 'begin':'', 'dur':''},
-            'textstream': {'src':'', 'region':''}
+            'root-layout': ['width', 'height', 'background-color'],
+            'region': ['id', 'top', 'bottom', 'left', 'right'],
+            'img': ['src', 'region', 'begin', 'dur'],
+            'audio': ['src', 'begin', 'dur'],
+            'textstream': ['src', 'region']
         }
 
     def startElement(self, name, attrs):
         """Método que se llama cuando se abre una etiqueta"""
-
+        dicc = {}
         if name in self.tags:
-            attribs = attrs.getNames()
-            for attrib in attribs:
-                self.tags[name][attrib] = attrs.get(attrib, "")
+            dicc = {name:{'':''}}
+            for attri in self.tags[name]:
+                dicc[name] = {attri:attrs.get(attri, "")}
+                self.list.append(dicc)
 
     def get_tags(self):
-        return self.tags
+        return self.list
 
 if __name__ == "__main__":
 
