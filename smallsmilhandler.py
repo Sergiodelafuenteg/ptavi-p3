@@ -23,7 +23,8 @@ class SmallSMILHandler(ContentHandler):
         if name in self.tags:
             dicc = {name:{'':''}}
             for attri in self.tags[name]:
-                dicc[name] = {attri:attrs.get(attri, "")}
+                dicc[name] = {attri:''}
+                dicc[name][attri] = attrs.get(attri, "")
                 self.list.append(dicc)
 
     def get_tags(self):
