@@ -24,17 +24,16 @@ class KaraokeLocal(SmallSMILHandler):
         for tag in self.tags:
             for attri in tag:
                 for cont in tag[attri]:
-                    linea = "{}='{}'".format(cont, tag[attri][cont])
-                    list_attri.append(linea)
+                    if tag[attri][cont] != '':
+                        linea = ""
+                        linea = "{}='{}'".format(cont, tag[attri][cont])
+                        list_attri.append(linea)
                 linea = "{}\t{}".format(attri, '\t'.join(list_attri))
+                del list_attri[:]
                 list_lines.append(linea)
         stringtag = '\n'.join(list_lines)
-
         return stringtag
 
-        #tag + '\t' + attr + "=" + cont + \n
-        #Elemento1\tAtributo11="Valor11"\tAtributo12="Valor12"\t...\n
-        #root-layout\twidth="248"\theight="300"\tbackground-color="blue"\n
     def to_json(self,name_smil,name_json = ''):
         if name_json[-5:] != '.json':
             name_json = name_smil.split('.')[0] + '.json'
