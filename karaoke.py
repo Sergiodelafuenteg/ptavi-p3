@@ -9,9 +9,8 @@ from urllib.request import urlretrieve
 
 class KaraokeLocal(SmallSMILHandler):
 
-    def __init__(self):
+    def __init__(self, fich):
 
-        fich = sys.argv[1]
         parser = make_parser()
         sHandler = SmallSMILHandler()
         parser.setContentHandler(sHandler)
@@ -36,8 +35,10 @@ class KaraokeLocal(SmallSMILHandler):
         #tag + '\t' + attr + "=" + cont + \n
         #Elemento1\tAtributo11="Valor11"\tAtributo12="Valor12"\t...\n
         #root-layout\twidth="248"\theight="300"\tbackground-color="blue"\n
-    def to_json(self):
-        with open('karaoke.json', 'w') as outfile:
+    def to_json(self,name_smil,name_json = ''):
+        if name_json[-5:] != '.json':
+            name_json = name_smil.split('.')[0] + '.json'
+        with open(name_json, 'w') as outfile:
             json.dump(self.tags, outfile, indent = 3)
 
     def do_local(self):
@@ -53,6 +54,10 @@ if __name__ == '__main__':
 
     if len(sys.argv) != 2:
         sys.exit("Usage: python3 karaoke.py file.smil.")
-
-    karaoke = KaraokeLocal()
+    fich = sys.argv[1]
+    karaoke = KaraokeLocal(fich)
+    print(karaoke)
+    karaoke.to_json(fich)
     karaoke.do_local()
+    karaoke.to_json(fich, 'local.json')
+    print(karaoke)
