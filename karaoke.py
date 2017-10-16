@@ -17,13 +17,13 @@ class KaraokeLocal(SmallSMILHandler):
 
         stringtag = ""
         for tag in self.tags:
-            stringtag += tag + '\t'
-            for attr in self.tags[tag]:
-                stringtag += attr + '\t'
-            stringtag += "\n"
+            stringtag = "{}".format(self.tags)
         return stringtag
 
+        #tag + '\t' + attr + "=" + cont + \n
+        #Elemento1\tAtributo11="Valor11"\tAtributo12="Valor12"\t...\n
+        #root-layout\twidth="248"\theight="300"\tbackground-color="blue"\n
 if __name__ == '__main__':
 
     k = KaraokeLocal()
-    print(k.__str__())
+    print(k)
