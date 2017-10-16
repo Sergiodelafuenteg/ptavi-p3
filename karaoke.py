@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import sys
 from xml.sax import make_parser
 from smallsmilhandler import SmallSMILHandler
 import json
@@ -47,6 +48,9 @@ class KaraokeLocal(SmallSMILHandler):
                         tag[attri][cont] = tag[attri][cont].split('/')[-1])
 
 if __name__ == '__main__':
+
+    if len(sys.argv) != 2:
+        sys.exit("Usage: python3 karaoke.py file.smil.")
 
     karaoke = KaraokeLocal()
     karaoke.do_local()
