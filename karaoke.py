@@ -15,10 +15,10 @@ class KaraokeLocal(SmallSMILHandler):
 
     def __str__(self):
 
-        stringtag = ""
-        for tag in self.tags:
-            for attr in self.tags[tag]:
-                stringtag = "{}".format('\t'.join(self.tags))
+        stringtag = '-'.join(str(self.tags))
+
+
+
 
         return stringtag
 
