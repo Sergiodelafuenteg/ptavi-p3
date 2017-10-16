@@ -17,7 +17,9 @@ class KaraokeLocal(SmallSMILHandler):
 
         stringtag = ""
         for tag in self.tags:
-            stringtag = "{}".format(self.tags)
+            for attr in self.tags[tag]:
+                stringtag = "{}".format('\t'.join(self.tags))
+
         return stringtag
 
         #tag + '\t' + attr + "=" + cont + \n
