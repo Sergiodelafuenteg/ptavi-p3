@@ -43,9 +43,8 @@ class KaraokeLocal(SmallSMILHandler):
             for attri in tag:
                 for cont in tag[attri]:
                     if cont == 'src' and tag[attri][cont][:7] == "http://":
-                        print("yeyeyey")
                         urlretrieve(tag[attri][cont],tag[attri][cont].split('/')[-1])
-
+                        tag[attri][cont] = tag[attri][cont].split('/')[-1])
 
 if __name__ == '__main__':
 
