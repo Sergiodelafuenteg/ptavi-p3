@@ -7,6 +7,7 @@ from smallsmilhandler import SmallSMILHandler
 import json
 from urllib.request import urlretrieve
 
+
 class KaraokeLocal(SmallSMILHandler):
 
     def __init__(self, fich):
@@ -34,11 +35,11 @@ class KaraokeLocal(SmallSMILHandler):
         stringtag = '\n'.join(list_lines)
         return stringtag
 
-    def to_json(self,name_smil,name_json = ''):
+    def to_json(self, name_smil, name_json=''):
         if name_json[-5:] != '.json':
             name_json = name_smil.split('.')[0] + '.json'
         with open(name_json, 'w') as outfile:
-            json.dump(self.tags, outfile, indent = 3)
+            json.dump(self.tags, outfile, indent=3)
 
     def do_local(self):
 
@@ -46,7 +47,7 @@ class KaraokeLocal(SmallSMILHandler):
             for attri in tag:
                 for cont in tag[attri]:
                     if cont == 'src' and tag[attri][cont][:7] == "http://":
-                        urlretrieve(tag[attri][cont],tag[attri][cont].split('/')[-1])
+                        urlretrieve(tag[attri][cont], tag[attri][cont].split('/')[-1])
                         tag[attri][cont] = tag[attri][cont].split('/')[-1]
 
 if __name__ == '__main__':
