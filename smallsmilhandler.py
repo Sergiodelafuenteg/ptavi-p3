@@ -19,13 +19,12 @@ class SmallSMILHandler(ContentHandler):
 
     def startElement(self, name, attrs):
         """Método que se llama cuando se abre una etiqueta"""
-        dicc = {}
+
         if name in self.tags:
-            dicc = {name:{'':''}}
+            dicc = {name:''}
             for attri in self.tags[name]:
-                dicc[name] = {attri:''}
-                dicc[name][attri] = attrs.get(attri, "")
-                self.list.append(dicc)
+                dicc[attri] = attrs.get(attri, "")
+            self.list.append(dicc)
 
     def get_tags(self):
         return self.list
