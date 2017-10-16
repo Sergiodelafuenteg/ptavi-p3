@@ -4,9 +4,10 @@
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
+
 class SmallSMILHandler(ContentHandler):
     """Clase para manejar SMIL"""
-    def __init__ (self):
+    def __init__(self):
         """Constructor. Inicializamos las variables"""
         self.list = []
         self.tags = {
@@ -20,7 +21,7 @@ class SmallSMILHandler(ContentHandler):
         """Método que se llama cuando se abre una etiqueta"""
 
         if name in self.tags:
-            dicc = {}            
+            dicc = {}
             for attri in self.tags[name]:
                 dicc[attri] = attrs.get(attri, "")
             self.list.append({name: dicc})
